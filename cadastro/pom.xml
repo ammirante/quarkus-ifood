@@ -68,6 +68,41 @@
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-hibernate-validator</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>1.14.3</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.database-rider</groupId>
+			<artifactId>rider-core</artifactId>
+			<version>1.15.3</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.database-rider</groupId>
+			<artifactId>rider-cdi</artifactId>
+			<version>1.15.3</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>stax</groupId>
+			<artifactId>stax</artifactId>
+			<version>1.2.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.approvaltests</groupId>
+			<artifactId>approvaltests</artifactId>
+			<version>4.0.2</version>
+			<scope>test</scope>
+		</dependency>
+	    <dependency>
+	    	<groupId>com.google.code.gson</groupId>
+	      	<artifactId>gson</artifactId>	      	
+	      	<scope>test</scope>
+	    </dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -75,7 +110,7 @@
 				<groupId>io.quarkus</groupId>
 				<artifactId>quarkus-maven-plugin</artifactId>
 				<version>${quarkus-plugin.version}</version>
-				<executions>
+				<!-- <executions>
 					<execution>
 						<goals>
 							<goal>prepare</goal>
@@ -83,7 +118,7 @@
 							<goal>build</goal>
 						</goals>
 					</execution>
-				</executions>
+				</executions>-->
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
