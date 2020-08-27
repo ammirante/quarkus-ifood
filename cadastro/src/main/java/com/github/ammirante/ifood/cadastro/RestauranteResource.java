@@ -34,7 +34,6 @@ public class RestauranteResource {
     @Transactional
     public Response adicionarRestaurante(Restaurante restauranteDto) {
     	restauranteDto.persist();
-    	
     	return Response.status(Status.CREATED).build();
     }
     

@@ -1,0 +1,9 @@
+restaurante:
+  - ID: 123
+    NOME: "Novo Restaurante"
+    PROPRIETARIO: "ID do keyclock" 
+prato:
+  - ID: 123
+    NOME: "Novo prato"
+    DESCRICAO: "Descrição do meu prato" 
+    RESTAURANTE_ID: 123
