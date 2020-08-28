@@ -1,4 +1,4 @@
-package com.github.ammirante.ifood.cadastro;
+package com.github.ammirante.ifood.cadastro.entidade;
 
 import java.util.Date;
 
@@ -29,9 +29,7 @@ public class Restaurante extends PanacheEntityBase {
 	public Long id;
 		
 	public String proprietario;
-	
 	public String cnpj;
-	
 	public String nome;
 	
 	@OneToOne(cascade = CascadeType.ALL)

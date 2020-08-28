@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import com.github.ammirante.ifood.cadastro.dto.AtualizarPratoDto;
 import com.github.ammirante.ifood.cadastro.dto.AtualizarRestauranteDto;
+import com.github.ammirante.ifood.cadastro.entidade.Prato;
+import com.github.ammirante.ifood.cadastro.entidade.Restaurante;
 import com.github.database.rider.cdi.api.DBRider;
 import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.configuration.Orthography;
@@ -62,7 +64,7 @@ public class RestauranteResourceTest {
     @DataSet(value = "restaurantes-cenario-1.yml")
     public void testAtualizarRestaurante() {
     	AtualizarRestauranteDto atualizarRestauranteDto = new AtualizarRestauranteDto();
-    	atualizarRestauranteDto.setNome("Novo nome");
+    	atualizarRestauranteDto.nome = "Novo nome";
     	given()
     	.with()
     	.pathParam("id", ID_RESTAURANTE)
@@ -74,7 +76,7 @@ public class RestauranteResourceTest {
     	;
     	
     	Restaurante restaurante = Restaurante.findById(ID_RESTAURANTE);
-    	Assert.assertEquals(atualizarRestauranteDto.getNome(), restaurante.nome);
+    	Assert.assertEquals(atualizarRestauranteDto.nome, restaurante.nome);
     }
     
     @Test
@@ -135,7 +137,7 @@ public class RestauranteResourceTest {
     @DataSet(value = "pratos-cenario-1.yml")
     public void testAtualizarPrato() {
     	AtualizarPratoDto atualizarPratoDto = new AtualizarPratoDto();
-    	atualizarPratoDto.setNome("Novo nome");
+    	atualizarPratoDto.nome = "Novo nome";
     	given()
     	.with()
     	.pathParam("idRestaurante", ID_RESTAURANTE)
@@ -148,7 +150,7 @@ public class RestauranteResourceTest {
     	;
     	
     	Prato prato = Prato.findById(ID_PRATO);
-    	Assert.assertEquals(atualizarPratoDto.getNome(), prato.nome);
+    	Assert.assertEquals(atualizarPratoDto.nome, prato.nome);
     }
     
     /**

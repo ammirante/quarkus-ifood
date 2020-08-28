@@ -1,4 +1,4 @@
-package com.github.ammirante.ifood.cadastro;
+package com.github.ammirante.ifood.cadastro.entidade;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +20,5 @@ public class Localizacao {
 	public Long id;
 	
 	public Double latitute;
-	
 	public Double longitude;
-	
 }

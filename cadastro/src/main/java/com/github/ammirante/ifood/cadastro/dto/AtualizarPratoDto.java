@@ -1,31 +1,18 @@
 package com.github.ammirante.ifood.cadastro.dto;
 
-import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * AtualizarPratoDto
  *
  */
-public class AtualizarPratoDto implements Serializable {
+public class AtualizarPratoDto extends CadastroDTO {
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7860001516826682877L;
+	private static final long serialVersionUID = 382131754274660060L;
 	
-	private String nome;
-	
-	/**
-	 * @return the nome
-	 */
-	public String getNome() {
-		return nome;
-	}
-
-	/**
-	 * @param nome the nome to set
-	 */
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+	public String descricao;
+	public BigDecimal preco;
 }

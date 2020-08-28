@@ -1,4 +1,4 @@
-package com.github.ammirante.ifood.cadastro;
+package com.github.ammirante.ifood.cadastro.entidade;
 
 import java.math.BigDecimal;
 
@@ -25,11 +25,10 @@ public class Prato extends PanacheEntityBase {
 	public Long id;
 	
 	public String nome;
-	
 	public String descricao;
+	public BigDecimal preco;
 	
 	@ManyToOne
 	public Restaurante restaurante;
 	
-	public BigDecimal preco;
 }
