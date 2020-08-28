@@ -3,6 +3,7 @@ package com.github.ammirante.ifood.cadastro;
 import java.util.List;
 import java.util.Optional;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -19,24 +20,42 @@ import javax.ws.rs.core.Response.Status;
 
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
+import com.github.ammirante.ifood.cadastro.dto.AdicionarRestauranteDTO;
+import com.github.ammirante.ifood.cadastro.dto.RestauranteMapper;
+
 @Path("/restaurantes")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Tag(name = "restaurante")
 public class RestauranteResource {
+	
+	@Inject
+	private RestauranteMapper restauranteMapper;
 
+    /**
+     * @return
+     */
     @GET
     public List<Restaurante> buscarRestaurantes() {
         return Restaurante.listAll();
     }
     
+    /**
+     * @param restauranteDto
+     * @return
+     */
     @POST
     @Transactional
-    public Response adicionarRestaurante(Restaurante restauranteDto) {
-    	restauranteDto.persist();
+    public Response adicionarRestaurante(AdicionarRestauranteDTO restauranteDto) {
+    	Restaurante restaurante = restauranteMapper.toRestaurante(restauranteDto);
+    	restaurante.persist();
     	return Response.status(Status.CREATED).build();
     }
     
+    /**
+     * @param idRestaurante
+     * @param restauranteDto
+     */
     @PUT
     @Path("{id}")
     @Transactional
@@ -51,6 +70,9 @@ public class RestauranteResource {
     	restaurante.persist();
     }
     
+    /**
+     * @param idRestaurante
+     */
     @DELETE
     @Path("{id}")
     @Transactional
@@ -62,6 +84,10 @@ public class RestauranteResource {
     	});
     }
     
+    /**
+     * @param idRestaurante
+     * @return
+     */
     @GET
     @Path("{idRestaurante}/pratos")
     @Tag(name = "prato")
@@ -74,6 +100,11 @@ public class RestauranteResource {
     	return Prato.list("restaurante", restauranteOp.get());
     }
     
+    /**
+     * @param idRestaurante
+     * @param pratoDto
+     * @return
+     */
     @POST
     @Tag(name = "prato")
     @Path("{idRestaurante}/pratos")
@@ -89,6 +120,11 @@ public class RestauranteResource {
     	return Response.status(Status.CREATED).build();
     }
     
+    /**
+     * @param idRestaurante
+     * @param idPrato
+     * @param pratoDto
+     */
     @PUT
     @Tag(name = "prato")
     @Path("{idRestaurante}/pratos/{id}")
@@ -112,6 +148,10 @@ public class RestauranteResource {
     	prato.persist();
     }
     
+    /**
+     * @param idRestaurante
+     * @param idPrato
+     */
     @DELETE
     @Tag(name = "prato")
     @Path("{idRestaurante}/pratos/{id}")

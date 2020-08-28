@@ -1,7 +1,5 @@
 package com.github.ammirante.ifood.cadastro;
 
-import static io.restassured.RestAssured.given;
-
 import java.util.Optional;
 
 import javax.ws.rs.core.Response.Status;
@@ -19,7 +17,9 @@ import com.github.database.rider.core.api.dataset.DataSet;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.specification.RequestSpecification;
 
 /**
  * RestauranteResourceTest
@@ -33,6 +33,10 @@ public class RestauranteResourceTest {
 
 	private static final Long ID_RESTAURANTE = 123L;
 	private static final Long ID_PRATO = 123L;
+	
+	private RequestSpecification given() {
+		return RestAssured.given().contentType(ContentType.JSON);
+	}
 	
     /**
      * 
@@ -61,7 +65,6 @@ public class RestauranteResourceTest {
     	atualizarRestauranteDto.setNome("Novo nome");
     	given()
     	.with()
-    	.contentType(ContentType.JSON)
     	.pathParam("id", ID_RESTAURANTE)
     	.body(atualizarRestauranteDto)
     	.when()
@@ -98,7 +101,6 @@ public class RestauranteResourceTest {
     	Restaurante restauranteInsercao = new Restaurante();
     	restauranteInsercao.nome = "Novo restaurante";
     	given()
-    	.contentType(ContentType.JSON)
     	.body(restauranteInsercao)
     	.when()
     	.post("/restaurantes")
@@ -136,7 +138,6 @@ public class RestauranteResourceTest {
     	atualizarPratoDto.setNome("Novo nome");
     	given()
     	.with()
-    	.contentType(ContentType.JSON)
     	.pathParam("idRestaurante", ID_RESTAURANTE)
     	.pathParam("id", ID_PRATO)
     	.body(atualizarPratoDto)
@@ -178,7 +179,6 @@ public class RestauranteResourceTest {
     	Prato pratoInsercao = new Prato();
     	pratoInsercao.nome = "Novo prato";
     	given()
-    	.contentType(ContentType.JSON)
     	.pathParam("idRestaurante", ID_RESTAURANTE)
     	.body(pratoInsercao)
     	.when()
