@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import com.github.ammirante.ifood.cadastro.dto.AtualizarPratoDto;
 import com.github.ammirante.ifood.cadastro.dto.AtualizarRestauranteDto;
+import com.github.ammirante.ifood.cadastro.dto.RestauranteDTO;
 import com.github.ammirante.ifood.cadastro.entidade.Prato;
 import com.github.ammirante.ifood.cadastro.entidade.Restaurante;
 import com.github.database.rider.cdi.api.DBRider;
@@ -64,7 +65,7 @@ public class RestauranteResourceTest {
     @DataSet(value = "restaurantes-cenario-1.yml")
     public void testAtualizarRestaurante() {
     	AtualizarRestauranteDto atualizarRestauranteDto = new AtualizarRestauranteDto();
-    	atualizarRestauranteDto.nome = "Novo nome";
+    	atualizarRestauranteDto.nomeFantasia = "Novo nome";
     	given()
     	.with()
     	.pathParam("id", ID_RESTAURANTE)
@@ -76,7 +77,7 @@ public class RestauranteResourceTest {
     	;
     	
     	Restaurante restaurante = Restaurante.findById(ID_RESTAURANTE);
-    	Assert.assertEquals(atualizarRestauranteDto.nome, restaurante.nome);
+    	Assert.assertEquals(atualizarRestauranteDto.nomeFantasia, restaurante.nome);
     }
     
     @Test
@@ -100,10 +101,11 @@ public class RestauranteResourceTest {
      */
     @Test
     public void testAdicionarRestaurante() {
-    	Restaurante restauranteInsercao = new Restaurante();
-    	restauranteInsercao.nome = "Novo restaurante";
+    	RestauranteDTO restauranteDTO = new RestauranteDTO();
+    	restauranteDTO.cnpj = "32.123.123/3231-11";
+    	restauranteDTO.proprietario = "Douglas";
     	given()
-    	.body(restauranteInsercao)
+    	.body(restauranteDTO)
     	.when()
     	.post("/restaurantes")
     	.then()
@@ -137,7 +139,7 @@ public class RestauranteResourceTest {
     @DataSet(value = "pratos-cenario-1.yml")
     public void testAtualizarPrato() {
     	AtualizarPratoDto atualizarPratoDto = new AtualizarPratoDto();
-    	atualizarPratoDto.nome = "Novo nome";
+    	atualizarPratoDto.descricao = "Novo nome";
     	given()
     	.with()
     	.pathParam("idRestaurante", ID_RESTAURANTE)
@@ -150,7 +152,7 @@ public class RestauranteResourceTest {
     	;
     	
     	Prato prato = Prato.findById(ID_PRATO);
-    	Assert.assertEquals(atualizarPratoDto.nome, prato.nome);
+    	Assert.assertEquals(atualizarPratoDto.descricao, prato.nome);
     }
     
     /**

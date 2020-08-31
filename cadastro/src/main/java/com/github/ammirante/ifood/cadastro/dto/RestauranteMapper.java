@@ -27,7 +27,6 @@ public interface RestauranteMapper {
 	 */
 	@Mapping(target = "nome", source = "nomeFantasia")
 	public Restaurante toRestaurante(AtualizarRestauranteDto dto, @MappingTarget Restaurante restaurante);
-	
 	/**
 	 * @param restaurante
 	 * @return
