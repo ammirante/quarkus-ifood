@@ -1,6 +1,7 @@
 package com.github.ammirante.ifood.cadastro.dto;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 import com.github.ammirante.ifood.cadastro.entidade.Prato;
@@ -28,6 +29,7 @@ public interface PratoMapper {
 	 * @param prato
 	 * @return
 	 */
+	@Mapping(source = "restaurante", target = "restaurante")
 	public PratoDTO toPratoDTO(Prato prato);
 	
 }

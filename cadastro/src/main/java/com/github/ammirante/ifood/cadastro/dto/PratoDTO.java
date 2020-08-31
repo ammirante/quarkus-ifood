@@ -15,6 +15,6 @@ public class PratoDTO extends CadastroDTO {
 	public String nome;
 	public String descricao;
 	public String preco;
-	public RestauranteDTO restauranteDTO;
+	public RestauranteDTO restaurante;
 	
 }

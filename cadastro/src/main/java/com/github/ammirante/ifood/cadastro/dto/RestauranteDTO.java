@@ -17,7 +17,7 @@ public class RestauranteDTO extends CadastroDTO {
 	public String proprietario;
 	public String cnpj;
 	public String nome;
-	public LocalizacaoDTO localizacaoDTO; 
+	public LocalizacaoDTO localizacao; 
 	public Date dataCriacao;
 	
 }

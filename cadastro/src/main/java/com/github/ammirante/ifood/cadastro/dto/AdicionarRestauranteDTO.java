@@ -34,7 +34,7 @@ public class AdicionarRestauranteDTO extends CadastroDTO implements DTO {
 	@Size(min = 3, max = 30)
 	public String nomeFantasia;
 	
-	public LocalizacaoDTO localizacaoDTO;
+	public LocalizacaoDTO localizacao;
 	
     /**
      *

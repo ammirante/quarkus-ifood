@@ -1,7 +1,12 @@
 [
   {
-    "descricao": "DescriÃ§Ã£o do meu prato",
+    "descricao": "Descrição do meu prato",
     "id": 123,
-    "nome": "Novo prato"
+    "nome": "Novo prato",
+    "restaurante": {
+      "id": 123,
+      "nome": "Novo Restaurante",
+      "proprietario": "ID do keyclock"
+    }
   }
 ]

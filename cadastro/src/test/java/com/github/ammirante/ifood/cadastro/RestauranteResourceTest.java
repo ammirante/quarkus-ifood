@@ -6,6 +6,7 @@ import javax.ws.rs.core.Response.Status;
 
 import org.approvaltests.Approvals;
 import org.junit.Assert;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.github.ammirante.ifood.cadastro.dto.AtualizarPratoDto;
@@ -13,6 +14,7 @@ import com.github.ammirante.ifood.cadastro.dto.AtualizarRestauranteDto;
 import com.github.ammirante.ifood.cadastro.dto.RestauranteDTO;
 import com.github.ammirante.ifood.cadastro.entidade.Prato;
 import com.github.ammirante.ifood.cadastro.entidade.Restaurante;
+import com.github.ammirante.ifood.cadastro.util.TokenUtils;
 import com.github.database.rider.cdi.api.DBRider;
 import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.configuration.Orthography;
@@ -22,6 +24,7 @@ import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.http.Header;
 import io.restassured.specification.RequestSpecification;
 
 /**
@@ -36,9 +39,26 @@ public class RestauranteResourceTest {
 
 	private static final Long ID_RESTAURANTE = 123L;
 	private static final Long ID_PRATO = 123L;
+	private String token;
 	
+	/**
+	 * @throws Exception 
+	 * 
+	 */
+    @BeforeEach
+    public void gereToken() throws Exception {
+        token = TokenUtils.generateTokenString("/JWTProprietarioClaims.json", null);
+    }
+	
+	/**
+	 * @return
+	 */
 	private RequestSpecification given() {
-		return RestAssured.given().contentType(ContentType.JSON);
+		return RestAssured
+				.given()
+				.contentType(ContentType.JSON)
+				.header(new Header("Authorization", "Bearer " + token))
+				;
 	}
 	
     /**
@@ -117,7 +137,7 @@ public class RestauranteResourceTest {
      * 
      */
     @Test
-    @DataSet(value = "pratos-cenario-1.yml", cleanAfter = true)
+    @DataSet(value = "pratos-cenario-1.yml", cleanAfter = true, cleanBefore = true)
     public void testBuscarPratos() {
     	String resultado = given()
     			.when()
@@ -136,7 +156,7 @@ public class RestauranteResourceTest {
      * 
      */
     @Test
-    @DataSet(value = "pratos-cenario-1.yml")
+    @DataSet(value = "pratos-cenario-1.yml", cleanAfter = true)
     public void testAtualizarPrato() {
     	AtualizarPratoDto atualizarPratoDto = new AtualizarPratoDto();
     	atualizarPratoDto.descricao = "Novo nome";
@@ -152,7 +172,7 @@ public class RestauranteResourceTest {
     	;
     	
     	Prato prato = Prato.findById(ID_PRATO);
-    	Assert.assertEquals(atualizarPratoDto.descricao, prato.nome);
+    	Assert.assertEquals(atualizarPratoDto.descricao, prato.descricao);
     }
     
     /**

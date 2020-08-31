@@ -26,11 +26,13 @@ public interface RestauranteMapper {
 	 * @return
 	 */
 	@Mapping(target = "nome", source = "nomeFantasia")
+	@Mapping(source = "localizacaoDTO", target = "localizacao")
 	public Restaurante toRestaurante(AtualizarRestauranteDto dto, @MappingTarget Restaurante restaurante);
 	/**
 	 * @param restaurante
 	 * @return
 	 */
 	@Mapping(target = "dataCriacao", dateFormat = "dd/MM/yyyy HH:mm:ss")
+	@Mapping(source = "localizacao", target = "localizacao")
 	public RestauranteDTO toRestauranteDTO(Restaurante restaurante);
 }
